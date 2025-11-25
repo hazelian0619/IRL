@@ -1,0 +1,385 @@
+{
+  "questionnaire_name": "Big Five Inventory - 44 (BFI-44)",
+  "version": "Standard Version",
+  "language": "en-zh (English-Chinese)",
+  "created_date": "2025-11-09",
+  "purpose": "Pre-test and post-test personality assessment for Alice Chen",
+  "reference": "John, O. P., Donahue, E. M., & Kentle, R. L. (1991). The Big Five Inventory",
+
+  "response_scale": {
+    "1": "非常不同意 (Strongly Disagree)",
+    "2": "有点不同意 (Disagree a Little)",
+    "3": "既不同意也不反对 (Neither Agree nor Disagree)",
+    "4": "有点同意 (Agree a Little)",
+    "5": "非常同意 (Strongly Agree)"
+  },
+
+  "instructions": {
+    "en": "Please indicate how much you agree or disagree with each statement by selecting a number from 1 to 5.",
+    "zh": "请根据以下陈述对你的符合程度,选择1-5的数字表示你的同意程度。"
+  },
+
+  "questions": [
+    {
+      "id": 1,
+      "dimension": "E",
+      "reverse_scored": false,
+      "en": "I see myself as someone who is talkative.",
+      "zh": "我认为自己是一个健谈的人。"
+    },
+    {
+      "id": 2,
+      "dimension": "A",
+      "reverse_scored": true,
+      "en": "I see myself as someone who tends to find fault with others.",
+      "zh": "我认为自己是一个倾向于挑剔他人的人。"
+    },
+    {
+      "id": 3,
+      "dimension": "C",
+      "reverse_scored": false,
+      "en": "I see myself as someone who does a thorough job.",
+      "zh": "我认为自己是一个把工作做得彻底的人。"
+    },
+    {
+      "id": 4,
+      "dimension": "N",
+      "reverse_scored": false,
+      "en": "I see myself as someone who is depressed, blue.",
+      "zh": "我认为自己是一个容易感到沮丧、忧郁的人。"
+    },
+    {
+      "id": 5,
+      "dimension": "O",
+      "reverse_scored": false,
+      "en": "I see myself as someone who is original, comes up with new ideas.",
+      "zh": "我认为自己是一个有独创性、能想出新点子的人。"
+    },
+    {
+      "id": 6,
+      "dimension": "E",
+      "reverse_scored": true,
+      "en": "I see myself as someone who is reserved.",
+      "zh": "我认为自己是一个话不多、矜持的人。"
+    },
+    {
+      "id": 7,
+      "dimension": "A",
+      "reverse_scored": false,
+      "en": "I see myself as someone who is helpful and unselfish with others.",
+      "zh": "我认为自己是一个乐于助人、无私的人。"
+    },
+    {
+      "id": 8,
+      "dimension": "C",
+      "reverse_scored": true,
+      "en": "I see myself as someone who can be somewhat careless.",
+      "zh": "我认为自己是一个有时会粗心大意的人。"
+    },
+    {
+      "id": 9,
+      "dimension": "N",
+      "reverse_scored": true,
+      "en": "I see myself as someone who is relaxed, handles stress well.",
+      "zh": "我认为自己是一个放松的、能很好应对压力的人。"
+    },
+    {
+      "id": 10,
+      "dimension": "O",
+      "reverse_scored": false,
+      "en": "I see myself as someone who is curious about many different things.",
+      "zh": "我认为自己是一个对很多不同事物都充满好奇的人。"
+    },
+    {
+      "id": 11,
+      "dimension": "E",
+      "reverse_scored": false,
+      "en": "I see myself as someone who is full of energy.",
+      "zh": "我认为自己是一个充满活力的人。"
+    },
+    {
+      "id": 12,
+      "dimension": "A",
+      "reverse_scored": true,
+      "en": "I see myself as someone who starts quarrels with others.",
+      "zh": "我认为自己是一个容易与他人争吵的人。"
+    },
+    {
+      "id": 13,
+      "dimension": "C",
+      "reverse_scored": false,
+      "en": "I see myself as someone who is a reliable worker.",
+      "zh": "我认为自己是一个可靠的工作者。"
+    },
+    {
+      "id": 14,
+      "dimension": "N",
+      "reverse_scored": false,
+      "en": "I see myself as someone who can be tense.",
+      "zh": "我认为自己是一个容易紧张的人。"
+    },
+    {
+      "id": 15,
+      "dimension": "O",
+      "reverse_scored": false,
+      "en": "I see myself as someone who is ingenious, a deep thinker.",
+      "zh": "我认为自己是一个善于思考、有创造力的人。"
+    },
+    {
+      "id": 16,
+      "dimension": "E",
+      "reverse_scored": false,
+      "en": "I see myself as someone who generates a lot of enthusiasm.",
+      "zh": "我认为自己是一个能产生很多热情的人。"
+    },
+    {
+      "id": 17,
+      "dimension": "A",
+      "reverse_scored": false,
+      "en": "I see myself as someone who has a forgiving nature.",
+      "zh": "我认为自己是一个宽容的人。"
+    },
+    {
+      "id": 18,
+      "dimension": "C",
+      "reverse_scored": true,
+      "en": "I see myself as someone who tends to be disorganized.",
+      "zh": "我认为自己是一个倾向于杂乱无章的人。"
+    },
+    {
+      "id": 19,
+      "dimension": "N",
+      "reverse_scored": false,
+      "en": "I see myself as someone who worries a lot.",
+      "zh": "我认为自己是一个经常担心的人。"
+    },
+    {
+      "id": 20,
+      "dimension": "O",
+      "reverse_scored": false,
+      "en": "I see myself as someone who has an active imagination.",
+      "zh": "我认为自己是一个有丰富想象力的人。"
+    },
+    {
+      "id": 21,
+      "dimension": "E",
+      "reverse_scored": true,
+      "en": "I see myself as someone who tends to be quiet.",
+      "zh": "我认为自己是一个倾向于安静的人。"
+    },
+    {
+      "id": 22,
+      "dimension": "A",
+      "reverse_scored": false,
+      "en": "I see myself as someone who is generally trusting.",
+      "zh": "我认为自己是一个通常信任他人的人。"
+    },
+    {
+      "id": 23,
+      "dimension": "C",
+      "reverse_scored": true,
+      "en": "I see myself as someone who tends to be lazy.",
+      "zh": "我认为自己是一个倾向于懒惰的人。"
+    },
+    {
+      "id": 24,
+      "dimension": "N",
+      "reverse_scored": true,
+      "en": "I see myself as someone who is emotionally stable, not easily upset.",
+      "zh": "我认为自己是一个情绪稳定、不容易心烦的人。"
+    },
+    {
+      "id": 25,
+      "dimension": "O",
+      "reverse_scored": false,
+      "en": "I see myself as someone who is inventive.",
+      "zh": "我认为自己是一个有创造力的人。"
+    },
+    {
+      "id": 26,
+      "dimension": "E",
+      "reverse_scored": false,
+      "en": "I see myself as someone who has an assertive personality.",
+      "zh": "我认为自己是一个果断自信的人。"
+    },
+    {
+      "id": 27,
+      "dimension": "A",
+      "reverse_scored": true,
+      "en": "I see myself as someone who can be cold and aloof.",
+      "zh": "我认为自己是一个可能冷漠疏远的人。"
+    },
+    {
+      "id": 28,
+      "dimension": "C",
+      "reverse_scored": false,
+      "en": "I see myself as someone who perseveres until the task is finished.",
+      "zh": "我认为自己是一个坚持到任务完成的人。"
+    },
+    {
+      "id": 29,
+      "dimension": "N",
+      "reverse_scored": false,
+      "en": "I see myself as someone who can be moody.",
+      "zh": "我认为自己是一个情绪多变的人。"
+    },
+    {
+      "id": 30,
+      "dimension": "O",
+      "reverse_scored": false,
+      "en": "I see myself as someone who values artistic, aesthetic experiences.",
+      "zh": "我认为自己是一个重视艺术和审美体验的人。"
+    },
+    {
+      "id": 31,
+      "dimension": "E",
+      "reverse_scored": true,
+      "en": "I see myself as someone who is sometimes shy, inhibited.",
+      "zh": "我认为自己是一个有时会害羞、拘谨的人。"
+    },
+    {
+      "id": 32,
+      "dimension": "A",
+      "reverse_scored": false,
+      "en": "I see myself as someone who is considerate and kind to almost everyone.",
+      "zh": "我认为自己是一个对几乎所有人都体贴友善的人。"
+    },
+    {
+      "id": 33,
+      "dimension": "C",
+      "reverse_scored": false,
+      "en": "I see myself as someone who does things efficiently.",
+      "zh": "我认为自己是一个做事高效的人。"
+    },
+    {
+      "id": 34,
+      "dimension": "N",
+      "reverse_scored": true,
+      "en": "I see myself as someone who remains calm in tense situations.",
+      "zh": "我认为自己是一个在紧张情况下保持冷静的人。"
+    },
+    {
+      "id": 35,
+      "dimension": "O",
+      "reverse_scored": true,
+      "en": "I see myself as someone who prefers work that is routine.",
+      "zh": "我认为自己是一个偏好常规工作的人。"
+    },
+    {
+      "id": 36,
+      "dimension": "E",
+      "reverse_scored": false,
+      "en": "I see myself as someone who is outgoing, sociable.",
+      "zh": "我认为自己是一个外向、善于社交的人。"
+    },
+    {
+      "id": 37,
+      "dimension": "A",
+      "reverse_scored": true,
+      "en": "I see myself as someone who is sometimes rude to others.",
+      "zh": "我认为自己是一个有时对他人无礼的人。"
+    },
+    {
+      "id": 38,
+      "dimension": "C",
+      "reverse_scored": false,
+      "en": "I see myself as someone who makes plans and follows through with them.",
+      "zh": "我认为自己是一个制定计划并执行的人。"
+    },
+    {
+      "id": 39,
+      "dimension": "N",
+      "reverse_scored": false,
+      "en": "I see myself as someone who gets nervous easily.",
+      "zh": "我认为自己是一个容易紧张的人。"
+    },
+    {
+      "id": 40,
+      "dimension": "O",
+      "reverse_scored": false,
+      "en": "I see myself as someone who likes to reflect, play with ideas.",
+      "zh": "我认为自己是一个喜欢思考、玩味想法的人。"
+    },
+    {
+      "id": 41,
+      "dimension": "E",
+      "reverse_scored": true,
+      "en": "I see myself as someone who has few artistic interests.",
+      "zh": "我认为自己是一个艺术兴趣较少的人。"
+    },
+    {
+      "id": 42,
+      "dimension": "A",
+      "reverse_scored": false,
+      "en": "I see myself as someone who likes to cooperate with others.",
+      "zh": "我认为自己是一个喜欢与他人合作的人。"
+    },
+    {
+      "id": 43,
+      "dimension": "C",
+      "reverse_scored": true,
+      "en": "I see myself as someone who is easily distracted.",
+      "zh": "我认为自己是一个容易分心的人。"
+    },
+    {
+      "id": 44,
+      "dimension": "O",
+      "reverse_scored": true,
+      "en": "I see myself as someone who is sophisticated in art, music, or literature.",
+      "zh": "我认为自己是一个在艺术、音乐或文学方面有修养的人。"
+    }
+  ],
+
+  "scoring_instructions": {
+    "反向计分题目": "ID: 2,6,8,9,12,18,21,23,24,27,31,34,35,37,41,43",
+    "反向计分规则": {
+      "1": 5,
+      "2": 4,
+      "3": 3,
+      "4": 2,
+      "5": 1
+    },
+    "维度计分": {
+      "E (Extraversion)": {
+        "题目ID": [1,6,11,16,21,26,31,36],
+        "题目数": 8,
+        "反向题": [6,21,31]
+      },
+      "A (Agreeableness)": {
+        "题目ID": [2,7,12,17,22,27,32,37,42],
+        "题目数": 9,
+        "反向题": [2,12,27,37]
+      },
+      "C (Conscientiousness)": {
+        "题目ID": [3,8,13,18,23,28,33,38,43],
+        "题目数": 9,
+        "反向题": [8,18,23,43]
+      },
+      "N (Neuroticism)": {
+        "题目ID": [4,9,14,19,24,29,34,39],
+        "题目数": 8,
+        "反向题": [9,24,34]
+      },
+      "O (Openness)": {
+        "题目ID": [5,10,15,20,25,30,35,40,44],
+        "题目数": 10,
+        "反向题": [35,41]
+      }
+    },
+    "归一化方法": "各维度得分 = (维度总分 - 维度题数×1) / (维度题数×4)",
+    "期望范围": "归一化后每个维度得分在0-1之间"
+  },
+
+  "validation_criteria": {
+    "完整性": "44题全部回答，无拒答",
+    "一致性": "同维度题目得分应有一定相关性",
+    "预设参数对比": {
+      "O_expected": 0.70,
+      "C_expected": 0.60,
+      "E_expected": 0.75,
+      "A_expected": 0.65,
+      "N_expected": 0.35
+    },
+    "通过标准": "Pearson相关系数 r > 0.75 (预设 vs 实测)"
+  }
+}
