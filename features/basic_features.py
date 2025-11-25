@@ -43,6 +43,62 @@ _NEGATIVE_WORDS = (
     "挫败",
 )
 
+_BEHAVIOR_CATEGORIES = {
+    # 社交相关：与人互动、对话、聚会等
+    "social": (
+        "和朋友",
+        "与朋友",
+        "与人",
+        "聊天",
+        "交谈",
+        "对话",
+        "见面",
+        "约会",
+        "聚会",
+        "派对",
+        "客人",
+        "顾客",
+        "社区",
+    ),
+    # 工作 / 任务：准备、布置、工作、开会等
+    "work": (
+        "工作",
+        "上班",
+        "准备",
+        "布置",
+        "打工",
+        "任务",
+        "项目",
+        "排班",
+        "值班",
+        "忙碌",
+    ),
+    # 休息 / 自我照顾：睡觉、休息、放松等
+    "rest": (
+        "休息",
+        "睡觉",
+        "小憩",
+        "放松",
+        "散步",
+        "走走",
+        "喝咖啡",
+        "喝茶",
+        "放空",
+    ),
+    # 创作 / 艺术 / 爱好
+    "creative": (
+        "画画",
+        "绘画",
+        "艺术",
+        "展览",
+        "作品",
+        "写作",
+        "写日记",
+        "音乐",
+        "练习",
+    ),
+}
+
 
 def _count_keywords(text: str, keywords: Tuple[str, ...]) -> int:
     if not text:
@@ -51,6 +107,21 @@ def _count_keywords(text: str, keywords: Tuple[str, ...]) -> int:
     for w in keywords:
         count += len(re.findall(re.escape(w), text))
     return count
+
+
+def _classify_behavior(description: str) -> Dict[str, int]:
+    """
+    Classify a behavior description into coarse categories based on keyword rules.
+
+    One description can contribute to multiple categories (e.g. social + work).
+    """
+    desc = description or ""
+    counts: Dict[str, int] = {k: 0 for k in _BEHAVIOR_CATEGORIES.keys()}
+    for cat, words in _BEHAVIOR_CATEGORIES.items():
+        for w in words:
+            if w in desc:
+                counts[cat] += 1
+    return counts
 
 
 def extract_daily_features(record: DailyRecord) -> Dict[str, float]:
@@ -70,6 +141,15 @@ def extract_daily_features(record: DailyRecord) -> Dict[str, float]:
 
     # Behavior statistics.
     feats["num_behaviors"] = float(len(record.behaviors))
+
+    # Coarse behavior categories (social / work / rest / creative).
+    beh_cat_counts: Dict[str, float] = {f"beh_{k}_count": 0.0 for k in _BEHAVIOR_CATEGORIES.keys()}
+    for beh in record.behaviors:
+        desc = str(beh.get("description", "") or "")
+        cat_counts = _classify_behavior(desc)
+        for cat, cnt in cat_counts.items():
+            beh_cat_counts[f"beh_{cat}_count"] += float(cnt > 0)
+    feats.update(beh_cat_counts)
 
     # Keyword-based rough sentiment.
     feats["pos_word_count"] = float(_count_keywords(text, _POSITIVE_WORDS))
@@ -117,4 +197,3 @@ def build_feature_matrix(records: List[DailyRecord]) -> Tuple[np.ndarray, List[s
             mat[i, j] = float(feats.get(name, 0.0))
 
     return mat, feature_names
-

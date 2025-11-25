@@ -10,8 +10,8 @@ Phase 1（P1）：数据接口 & 基础特征
 
 - [DONE] A: 统一 60 天数据加载接口（`DatasetLoader`）
 - [DONE] A: EDA 脚本（绘制 mood 曲线、缺失率等）（当前实现为终端统计与验证输出）
-- [IN_PROGRESS] B: 从 behaviors/emotions 抽 5–10 个稳定的日级特征
-- [IN_PROGRESS] B: 产出 `X_daily (60×F)` + `y_daily` 的 Numpy/Pandas 版本
+- [DONE] B: 从 behaviors/emotions 抽 5–10 个稳定的日级特征（见 `features/basic_features.py`）
+- [DONE] B: 产出 `X_daily (60×F)` + `y_daily` 的 Numpy/Pandas 版本（见 `scripts/export_daily_features.py` 输出）
 - [DONE] C: 对现有 BFI 工具与 persona 做一次梳理，整理为实验指标规范文档（`project_plan/metrics_and_evaluation.md`）
 
 Phase 2（P2）：时间序列表示 & 人格回归
