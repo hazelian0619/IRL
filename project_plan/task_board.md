@@ -18,9 +18,9 @@ Phase 2（P2）：时间序列表示 & 人格回归
 --------------------------------------
 
 - [DONE] A: 实现 7 天滑动窗口统计 + 指数衰减基线模块（见 `features/temporal_features.py` 与 `scripts/export_temporal_features.py`）
-- [TODO] B: 实现 BiLSTM/GRU + 注意力编码器（基于日级特征序列）
-- [TODO] B: 完成一次「轨迹 → Big Five 预测」基准实验并记录指标
-- [TODO] C: 封装统一训练脚本 `train_personality_regressor.py`
+- [DONE] B: 实现 BiLSTM/GRU + 注意力编码器（见 `models/sequence_encoder.py`）
+- [DONE] B: 基于 temporal 特征完成一次自监督序列预训练（重构 rolling_stats），见 `scripts/train_sequence_encoder.py` 与 `logs/selfcheck_p2_sequence_autoencoder_isabella_irl_3d_clean.md`
+- [TODO] C: 在有足够 persona+BFI 标签后，封装统一训练脚本 `train_personality_regressor.py`，完成「轨迹 → Big Five 预测」基准实验并记录指标
 
 Phase 3（P3）：IRL / 偏好建模 MVP
 -------------------------------
