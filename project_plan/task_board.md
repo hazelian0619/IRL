@@ -17,7 +17,7 @@ Phase 1（P1）：数据接口 & 基础特征
 Phase 2（P2）：时间序列表示 & 人格回归
 --------------------------------------
 
-- [TODO] A: 实现 7 天滑动窗口统计 + 指数衰减基线模块
+- [DONE] A: 实现 7 天滑动窗口统计 + 指数衰减基线模块（见 `features/temporal_features.py` 与 `scripts/export_temporal_features.py`）
 - [TODO] B: 实现 BiLSTM/GRU + 注意力编码器（基于日级特征序列）
 - [TODO] B: 完成一次「轨迹 → Big Five 预测」基准实验并记录指标
 - [TODO] C: 封装统一训练脚本 `train_personality_regressor.py`
