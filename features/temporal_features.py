@@ -21,6 +21,7 @@ from typing import Tuple
 import numpy as np
 
 from utils.dataset_loader import DailyDataset
+from features.emotion_fusion import fusion_valence
 
 
 @dataclass
@@ -139,17 +140,24 @@ def export_temporal_features(dataset_root: str | Path) -> None:
         - decay_weights.npy: (T,) daily weights
         - temporal_meta.json: config and shapes
 
-    Currently we operate on the daily mood_score sequence as the fused label,
-    in line with the design doc. Later we can extend this to multi-dimensional
-    sequences (e.g. probabilities).
+    Currently we operate on a 1D daily emotion/valence sequence:
+        - if fusion_daily.npy exists, use fusion_valence (P(积极)-P(消极));
+        - otherwise, fall back to raw mood_score.
     """
     root = Path(dataset_root)
     ds = DailyDataset(root)
     out_dir = root / "features"
     out_dir.mkdir(parents=True, exist_ok=True)
 
-    # Mood sequence as 1D array in day order.
-    y = np.array([ds.get_day(d).mood_score for d in ds.days], dtype=np.float32)
+    # 1D 序列：优先使用融合概率导出的 valence；若不存在，则退回到 mood_score。
+    fusion_path = out_dir / "fusion_daily.npy"
+    if fusion_path.exists():
+        fusion_probs = np.load(fusion_path)  # (T, K)
+        y = fusion_valence(fusion_probs)
+        series_name = "fusion_valence"
+    else:
+        y = np.array([ds.get_day(d).mood_score for d in ds.days], dtype=np.float32)
+        series_name = "mood_score"
 
     sw_cfg = SlidingWindowConfig()
     decay_cfg = DecayConfig()
@@ -174,6 +182,7 @@ def export_temporal_features(dataset_root: str | Path) -> None:
         "decay": {
             "lambda": decay_cfg.lambda_,
         },
+        "source_series": series_name,
         "outputs": {
             "rolling_stats": str(out_dir / "rolling_stats.npy"),
             "global_baseline": str(out_dir / "global_baseline.npy"),
@@ -183,4 +192,3 @@ def export_temporal_features(dataset_root: str | Path) -> None:
     (out_dir / "temporal_meta.json").write_text(
         json.dumps(meta, ensure_ascii=False, indent=2), encoding="utf-8"
     )
-

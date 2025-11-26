@@ -20,7 +20,14 @@ Phase 2（P2）：时间序列表示 & 人格回归
 - [DONE] A: 实现 7 天滑动窗口统计 + 指数衰减基线模块（见 `features/temporal_features.py` 与 `scripts/export_temporal_features.py`）
 - [DONE] B: 实现 BiLSTM/GRU + 注意力编码器（见 `models/sequence_encoder.py`）
 - [DONE] B: 基于 temporal 特征完成一次自监督序列预训练（重构 rolling_stats），见 `scripts/train_sequence_encoder.py` 与 `logs/selfcheck_p2_sequence_autoencoder_isabella_irl_3d_clean.md`
-- [TODO] C: 在有足够 persona+BFI 标签后，封装统一训练脚本 `train_personality_regressor.py`，完成「轨迹 → Big Five 预测」基准实验并记录指标
+- [IN_PROGRESS] B/C: 以融合情绪概率为目标的时序情绪模型训练（替代仅 MSE 自监督），并设计人格 probe/回归头
+
+Phase 2+（Fusion）：多模态情绪融合结构（补齐 Step 4）
+--------------------------------------------------
+
+- [DONE] A/B: 基于文本/行为/情绪JSON/分数实现单模态情绪预测与精度评估（见 `features/emotion_fusion.py`）
+- [DONE] A/B: 按精度 softmax 得到权重 w，并导出 `fusion_daily.npy` + `fusion_meta.json`（见 `scripts/export_fusion_features.py` 与 `logs/selfcheck_p2_fusion_isabella_irl_3d_clean.md`）
+- [DONE] A/B: 在 `export_temporal_features` 中优先使用 `fusion_valence`（P(积极)-P(消极)）作为滑窗与指数衰减的输入（见 `features/temporal_features.py`）
 
 Phase 3（P3）：IRL / 偏好建模 MVP
 -------------------------------
