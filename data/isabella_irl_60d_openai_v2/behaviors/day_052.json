@@ -1,0 +1,17 @@
+{
+  "day": 52,
+  "behaviors": [
+    {
+      "time": "全天",
+      "description": "Isabella在Hobbs Cafe重新规划菜单和空间布局，感到空虚和不安，与顾客互动减少"
+    },
+    {
+      "time": "下午",
+      "description": "Isabella在小镇街道上碰到老朋友，有意外深入交谈，感到温暖但内疚"
+    },
+    {
+      "time": "晚上",
+      "description": "Isabella整理旧物品，重新装饰客厅，感到清新但孤独和思念家人"
+    }
+  ]
+}

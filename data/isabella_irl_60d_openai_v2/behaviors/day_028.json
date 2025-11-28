@@ -1,0 +1,17 @@
+{
+  "day": 28,
+  "behaviors": [
+    {
+      "time": "全天",
+      "description": "在 Hobbs Cafe 忙碌经营，处理了一场小冲突"
+    },
+    {
+      "time": "下午",
+      "description": "帮助年轻学生理解政治议题，让他变得更自信和开放"
+    },
+    {
+      "time": "晚上",
+      "description": "与年轻学生交流，感受到成就感和满足"
+    }
+  ]
+}

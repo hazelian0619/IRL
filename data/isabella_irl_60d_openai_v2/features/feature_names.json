@@ -1,0 +1,16 @@
+[
+  "beh_creative_count",
+  "beh_rest_count",
+  "beh_social_count",
+  "beh_work_count",
+  "emotion_other",
+  "emotion_中性",
+  "emotion_复杂",
+  "emotion_消极",
+  "emotion_积极",
+  "len_chars",
+  "mood_score",
+  "neg_word_count",
+  "num_behaviors",
+  "pos_word_count"
+]

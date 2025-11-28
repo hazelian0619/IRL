@@ -64,8 +64,12 @@ described in the planning doc `进度/12`:
 
 Example datasets under `data/`:
 
-- `isabella_irl_3d_clean/` – current 60‑day P1 dataset (nightly talks +
-  behaviors + emotions + `scores/mood_scores.csv`).
+- `isabella_irl_60d_openai_v2/` – **current 60‑day P1 dataset** for Isabella
+  (nightly talks + behaviors + emotions + `scores/mood_scores.csv`), generated
+  via `run_town_irl_days.py` + `RobotInterviewer` using an OpenAI‑compatible
+  backend.
+- `isabella_irl_3d_clean/` – earlier 3‑/10‑day sample used for prompt and
+  pipeline tuning; now kept as a small illustrative subset / ablation dataset.
 - `alice_irl_60d/` – work‑in‑progress Alice variant, generated with the same
   tools but currently only a few days populated.
 

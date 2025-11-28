@@ -1,0 +1,17 @@
+{
+  "day": 9,
+  "behaviors": [
+    {
+      "time": "全天",
+      "description": "Hobbs Cafe情人节繁忙，顾客络绎不绝，Isabella感到开心看到咖啡馆充满笑声和幸福氛围"
+    },
+    {
+      "time": "晚上",
+      "description": "工作量增加让Isabella感到身心疲惫，晚上回到公寓后感觉整个人有些累了"
+    },
+    {
+      "time": "全天",
+      "description": "Isabella被一对庆祝结婚50周年纪念日的夫妇感动，觉得自己参与到了他们生命中的特殊时刻中"
+    }
+  ]
+}

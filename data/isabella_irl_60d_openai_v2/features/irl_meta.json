@@ -1,0 +1,15 @@
+{
+  "dataset_root": "data/isabella_irl_60d_openai_v2",
+  "T": 54,
+  "embedding_dim": 257,
+  "reward_source": "fusion_valence_window_avg",
+  "inputs": {
+    "rolling_stats": "data/isabella_irl_60d_openai_v2/features/rolling_stats.npy",
+    "global_baseline": "data/isabella_irl_60d_openai_v2/features/global_baseline.npy",
+    "fusion_daily": "data/isabella_irl_60d_openai_v2/features/fusion_daily.npy"
+  },
+  "outputs": {
+    "temporal_embeddings": "data/isabella_irl_60d_openai_v2/features/temporal_embeddings.npy",
+    "window_valence": "data/isabella_irl_60d_openai_v2/features/window_valence.npy"
+  }
+}
