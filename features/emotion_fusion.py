@@ -23,7 +23,10 @@ from typing import Dict, List, Tuple
 import numpy as np
 
 from utils.dataset_loader import DailyDataset
-from features.basic_features import extract_daily_features
+from features.emotion_llm_backend import (
+    llm_emotion_probs_from_text,
+    llm_emotion_probs_from_behaviors,
+)
 
 
 CANONICAL_LABELS: Tuple[str, ...] = ("积极", "消极", "中性", "复杂")
@@ -66,7 +69,14 @@ def label_to_onehot(label: str) -> np.ndarray:
 
 
 def _text_probs(day_features: Dict[str, float]) -> np.ndarray:
-    """基于文本关键词计数的粗略情绪预测。"""
+    """
+    文本模态情绪预测（V0 规则版）。
+
+    说明：
+    - 若启用了 LLM backend，则在 compute_fusion 中优先调用
+      `llm_emotion_probs_from_text`，本函数作为 fallback 使用；
+    - 这里保留最初的关键词计数逻辑，确保在无 LLM 环境下仍可运行。
+    """
     pos = day_features.get("pos_word_count", 0.0)
     neg = day_features.get("neg_word_count", 0.0)
     if pos == 0 and neg == 0:
@@ -80,7 +90,7 @@ def _text_probs(day_features: Dict[str, float]) -> np.ndarray:
 
 def _behavior_probs(day_features: Dict[str, float]) -> np.ndarray:
     """
-    基于行为类别的粗略情绪预测。
+    行为模态情绪预测（V0 规则版）。
 
     规则（启发式）：
         - 高 social + 有 rest → 积极；
@@ -148,22 +158,36 @@ def compute_fusion(dataset_root: str | Path) -> FusionResult:
 
     days = ds.days
     gt_labels: List[str] = []
-    feats_per_day: List[Dict[str, float]] = []
-    probs_text = []
-    probs_beh = []
-    probs_em = []
-    probs_score = []
+    probs_text: List[np.ndarray] = []
+    probs_beh: List[np.ndarray] = []
+    probs_em: List[np.ndarray] = []
+    probs_score: List[np.ndarray] = []
 
     for day in days:
         rec = ds.get_day(day)
         gt = canonical_label(rec.emotion.get("label", ""))
         gt_labels.append(gt)
 
-        feats = extract_daily_features(rec)
-        feats_per_day.append(feats)
+        # 文本模态：必须使用 LLM backend，若未启用或失败则报错。
+        llm_text = llm_emotion_probs_from_text(rec.transcript_md)
+        if llm_text is None:
+            raise RuntimeError(
+                "LLM 文本情绪 backend 返回 None；"
+                "请确认已 source openai.env.local 且设置 IRL_FUSION_USE_LLM_BACKEND=true，"
+                "并检查 external_town 的 call_llama 与 JSON 输出格式。"
+            )
+        probs_text.append(llm_text)
 
-        probs_text.append(_text_probs(feats))
-        probs_beh.append(_behavior_probs(feats))
+        # 行为模态：同样只接受 LLM backend。
+        llm_beh = llm_emotion_probs_from_behaviors(rec.behaviors)
+        if llm_beh is None:
+            raise RuntimeError(
+                "LLM 行为情绪 backend 返回 None；"
+                "请确认已 source openai.env.local 且设置 IRL_FUSION_USE_LLM_BACKEND=true，"
+                "并检查 external_town 的 call_llama 与 JSON 输出格式。"
+            )
+        probs_beh.append(llm_beh)
+
         probs_em.append(_emotion_probs(rec.emotion.get("label", "")))
         probs_score.append(_score_probs(rec.mood_score))
 
@@ -246,4 +270,3 @@ def fusion_valence(fusion_probs: np.ndarray) -> np.ndarray:
     idx_pos = _LABEL_INDEX["积极"]
     idx_neg = _LABEL_INDEX["消极"]
     return (fusion_probs[:, idx_pos] - fusion_probs[:, idx_neg]).astype(np.float32)
-

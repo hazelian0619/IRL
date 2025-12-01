@@ -8,12 +8,16 @@ Train a sequence encoder on 60-day temporal features.
   而不是停留在随机初始化。
 
 说明：
-- 由于目前只有 Isabella 一条完整 60 天轨迹，且缺少与之配套的 BFI 人格标签，
-  本脚本暂不尝试“轨迹 -> Big Five 回归”，而是采用重构 rolling_stats 的自监督任务：
+- 当前我们使用的是 `data/isabella_irl_3d_clean` 这条 60 天轨迹，它有完整的多模态 nightly 数据，
+  但在本仓库中**没有找到与 Isabella 一一配套的 BFI 报告**。
+- BFI-44 前测/验证数据目前是为 Alice Chen 准备的（见 `validation/Alice_Chen_pretest_*.json`），
+  且 Alice 的 60 天数据集还未完全就绪，因此此脚本不直接做
+  “Isabella 轨迹 -> Big Five” 的监督回归，以避免混用不同 persona 的标签。
+- 在此阶段，本脚本采用重构 rolling_stats 的自监督任务：
     - 输入：rolling_stats (54×5)、global_baseline (1×1)
     - 编码：BiLSTMAttentionEncoder
     - 解码：线性层将每个时间步 embedding 投回 5 维统计量，MSE 作为损失。
-- 等后续有多 persona + BFI 标签时，可以在此基础上增加人格回归/分类头。
+- 等后续有「多 persona + 各自 60 天轨迹 + BFI 标签」时，可以在此基础上增加人格回归/分类头。
 """
 
 from __future__ import annotations
@@ -194,4 +198,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

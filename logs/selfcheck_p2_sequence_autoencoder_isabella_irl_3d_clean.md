@@ -70,7 +70,10 @@ python3 scripts/train_sequence_encoder.py --root data/isabella_irl_3d_clean --ep
 - 自监督任务性质：
   - 当前任务是重构 `rolling_stats`，属于时序 autoencoder，而非直接的人格回归；
   - 目的在于让 BiLSTM+注意力对 60 天情绪轨迹的短周期统计有“压缩-还原”的能力，为后续 IRL/人格任务提供可用的时序表示；
-  - 由于只有 Isabella 一条 60 天轨迹，本阶段不尝试“轨迹 -> Big Five”的监督学习，避免在降级监督上过拟合/自欺。
+- 数据与标签现状：
+  - 本仓库中，Isabella 有完整的 60 天多模态 nightly 轨迹，但暂未看到与之配套的 BFI 报告文件；
+  - Alice Chen 则有 BFI-44 前测/验证报告（`validation/Alice_Chen_pretest_*.json`），但 Alice 的 60 天轨迹尚未完备；
+  - 出于不混用不同 persona 标签的原则，本阶段不直接做“Isabella 轨迹 -> Alice 的 BFI” 这类监督学习，避免在标签层面降级/混淆。
 
 - 数值表现：
   - MSE 从 12.66 降到 1.31 表明模型能够捕捉到 rolling_stats 的主要结构；
@@ -88,4 +91,3 @@ python3 scripts/train_sequence_encoder.py --root data/isabella_irl_3d_clean --ep
 - 在 `data/isabella_irl_3d_clean` 上，BiLSTM+注意力 encoder 已经经过一次可重复的自监督预训练，重构误差显著下降；
 - 模型权重与配置已保存，可作为后续 IRL / 人格对齐实验的基础；
 - 真正的“轨迹 -> Big Five”实验需要更多 persona + 60 天轨迹配合 BFI 标签，目前保留在规划中的下一阶段。
-

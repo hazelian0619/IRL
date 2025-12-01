@@ -1,6 +1,9 @@
 """
 BFI-44 Interviewer - 向Agent提问并收集真实回答
-通过LLM生成Agent的自然语言回答，提取量化分数
+通过LLM生成Agent的自然语言回答，提取量化分数。
+
+支持命令行参数：
+    python agents/bfi_interviewer.py --agent "Isabella Rodriguez" --method llm
 """
 
 import json
@@ -9,6 +12,8 @@ import re
 from pathlib import Path
 from datetime import datetime
 import sys
+import argparse
+from typing import Optional
 
 # 添加Backend路径
 sys.path.insert(0, str(Path(__file__).parent.parent / 'external_town' / 'reverie' / 'backend_server'))
@@ -36,11 +41,17 @@ class BFIInterviewer:
 
     def load_agent_profile(self, agent_name: str) -> dict:
         """加载Agent的人格档案"""
-        # 从Alice的传记和预设参数中提取
+        # 从传记和预设参数中提取。
+        # 目前人物传记区分 Alice / Isabella，Big Five 预设参数沿用同一份 preset_personality.json。
         personas_dir = Path(__file__).parent.parent / "data" / "personas"
 
-        # 加载传记
-        bio_path = personas_dir / "alice_biography_prompt.txt"
+        # 加载传记：根据 agent_name 选择 alice 或 isabella 的 biography。
+        agent_lower = agent_name.lower()
+        if "isabella" in agent_lower:
+            bio_path = personas_dir / "isabella_biography_prompt.txt"
+        else:
+            bio_path = personas_dir / "alice_biography_prompt.txt"
+
         with open(bio_path, 'r', encoding='utf-8') as f:
             biography = f.read()
 
@@ -221,7 +232,7 @@ Explanation: [Your explanation]
 
         return report
 
-    def save_report(self, report: dict, output_dir: str = None) -> str:
+    def save_report(self, report: dict, output_dir: Optional[str] = None) -> str:
         """保存测试报告"""
         if output_dir is None:
             output_dir = Path(__file__).parent.parent / "validation"
@@ -240,37 +251,72 @@ Explanation: [Your explanation]
         return str(output_path)
 
 
-def main():
+def build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(description="Run BFI-44 pretest for a given agent.")
+    parser.add_argument(
+        "--agent",
+        type=str,
+        default="Alice Chen",
+        help="Agent name, e.g. 'Alice Chen' or 'Isabella Rodriguez'.",
+    )
+    parser.add_argument(
+        "--method",
+        type=str,
+        choices=["auto", "llm", "fallback"],
+        default="auto",
+        help=(
+            "Interview method: "
+            "'llm' = force Real LLM, "
+            "'fallback' = rule-based, "
+            "'auto' = interactive choice if possible (default)."
+        ),
+    )
+    return parser
+
+
+def main() -> None:
     """主函数 - 执行BFI-44前测"""
+
+    parser = build_parser()
+    args = parser.parse_args()
 
     interviewer = BFIInterviewer()
 
-    # 询问使用方式
-    print("\nBFI-44 Pretest Configuration")
-    print("="*60)
-    print("1. Use Real LLM (Llama) - Alice generates natural responses")
-    print("2. Use Fallback (Rule-based) - Faster, for testing")
-    print()
+    # 选择使用方式
+    if args.method == "auto":
+        print("\nBFI-44 Pretest Configuration")
+        print("=" * 60)
+        print("1. Use Real LLM (Llama) - generates natural responses")
+        print("2. Use Fallback (Rule-based) - Faster, for testing")
+        print()
 
-    if LLM_AVAILABLE:
-        choice = input("Select method (1/2) [default: 1]: ").strip() or "1"
-        use_llm = (choice == "1")
-    else:
-        print("⚠️  LLM not available, using Fallback method")
+        if LLM_AVAILABLE:
+            choice = input("Select method (1/2) [default: 1]: ").strip() or "1"
+            use_llm = choice == "1"
+        else:
+            print("⚠️  LLM not available, using Fallback method")
+            use_llm = False
+    elif args.method == "llm":
+        if not LLM_AVAILABLE:
+            print("⚠️  LLM not available, falling back to rule-based method")
+            use_llm = False
+        else:
+            use_llm = True
+    else:  # fallback
         use_llm = False
 
     print()
 
     # 执行问卷
-    report = interviewer.complete_questionnaire("Alice Chen", use_llm=use_llm)
+    report = interviewer.complete_questionnaire(args.agent, use_llm=use_llm)
 
     # 保存报告
     report_path = interviewer.save_report(report)
 
     # 显示摘要
-    print("\n" + "="*60)
+    print("\n" + "=" * 60)
     print("BFI-44 Pretest Complete")
-    print("="*60)
+    print("=" * 60)
     print(f"Agent: {report['agent_name']}")
     print(f"Method: {report['method']}")
     print(f"Questions answered: {report['total_questions']}")
