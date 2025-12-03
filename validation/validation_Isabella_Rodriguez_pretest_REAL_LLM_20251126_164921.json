@@ -1,0 +1,40 @@
+{
+  "agent_name": "Isabella Rodriguez",
+  "test_type": "pretest_REAL",
+  "source_report": "validation/Isabella_Rodriguez_pretest_REAL_LLM_20251126_164921.json",
+  "measured_scores": {
+    "E": 0.8438,
+    "A": 0.9444,
+    "C": 0.8056,
+    "N": 0.2188,
+    "O": 0.8056
+  },
+  "validation": {
+    "pearson_r": 0.9116,
+    "p_value": 0.0311,
+    "mae": 0.1661,
+    "dimension_errors": {
+      "O": 0.10560000000000003,
+      "C": 0.2056,
+      "E": 0.0938,
+      "A": 0.2944,
+      "N": 0.13119999999999998
+    },
+    "passed": true,
+    "threshold": 0.75,
+    "measured_scores": {
+      "E": 0.8438,
+      "A": 0.9444,
+      "C": 0.8056,
+      "N": 0.2188,
+      "O": 0.8056
+    },
+    "preset_scores": {
+      "O": 0.7,
+      "C": 0.6,
+      "E": 0.75,
+      "A": 0.65,
+      "N": 0.35
+    }
+  }
+}

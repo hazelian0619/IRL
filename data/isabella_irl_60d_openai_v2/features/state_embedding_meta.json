@@ -1,0 +1,26 @@
+{
+  "dataset_root": "companion-robot-irl/data/isabella_irl_60d_openai_v2",
+  "components": [
+    "handcrafted"
+  ],
+  "use_handcrafted": true,
+  "use_temporal_embedding": false,
+  "concat_mode": "handcrafted_only",
+  "dims": {
+    "handcrafted": 10,
+    "temporal": 0,
+    "total": 10
+  },
+  "handcrafted_feature_names": [
+    "valence_mean",
+    "valence_var",
+    "valence_trend",
+    "social_level",
+    "rest_level",
+    "work_level",
+    "conflict_level",
+    "phase_valentine",
+    "phase_election",
+    "phase_recovery"
+  ]
+}

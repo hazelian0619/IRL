@@ -3,3 +3,20 @@ __pycache__/
 results/
 *.log
 .DS_Store
+
+# Local caches and large external env
+.mplconfig/
+external_town/
+
+# Local experimental data (not versioned)
+data/isabella_irl_3d_clean/features/
+data/isabella_irl_3d_clean/models/
+data/isabella_irl_3d_lz/
+data/isabella_irl_3d_lz_v2/
+data/isabella_irl_3d_lz_v3/
+data/isabella_irl_3d_lz_v4/
+data/isabella_irl_3d_lz_v5/
+data/isabella_irl_3d_lz_v6/
+data/isabella_irl_60d/
+data/isabella_irl_60d_openai_v2/features/irl_theta.npy
+data/isabella_irl_60d_openai_v2/features/irl_reward_weekly.npy

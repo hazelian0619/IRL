@@ -76,3 +76,26 @@ Example datasets under `data/`:
 These artifacts are intended as **P1 synthetic trajectories** for downstream
 emotion / IRL modelling; any production‑grade IRL work should still treat the
 Stanford Town pipeline as the source of REAL data.
+
+## Weekly Preference IRL on Isabella 60d
+
+On top of the 60‑day synthetic dataset for Isabella, we implement a
+weekly preference‑based IRL layer:
+
+- `features/preference_features.py` and
+  `scripts/export_preference_features.py` build 10‑D weekly state vectors
+  φ(s_t) from valence, behaviors, and story phase.
+- `learning/irl_preference.py` and
+  `scripts/run_irl_preference_isabella.py` learn a linear reward
+  R_θ(s) = θᵀφ(s) from week‑to‑week preferences derived from
+  `window_valence.npy`.
+- `scripts/inspect_irl_preference_pairs.py` and
+  `scripts/inspect_irl_value_isabella.py` help inspect preference pairs
+  and the discounted value curve V_θ(t).
+- IRL artifacts are saved under
+  `data/isabella_irl_60d_openai_v2/features/` (preference_features,
+  irl_theta_v2, irl_reward_weekly_v2, state_embeddings, etc.) and
+  figures for the paper/live demo under `figures/`.
+
+This layer turns the 60‑day multimodal trace into an interpretable weekly
+preference model that can be aligned with Isabella's Big‑5 profile.

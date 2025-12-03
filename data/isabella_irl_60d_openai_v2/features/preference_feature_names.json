@@ -1,0 +1,31 @@
+{
+  "dataset_root": "data/isabella_irl_60d_openai_v2",
+  "num_weeks": 54,
+  "num_days": 60,
+  "window": 7,
+  "step": 1,
+  "feature_names": [
+    "valence_mean",
+    "valence_var",
+    "valence_trend",
+    "social_level",
+    "rest_level",
+    "work_level",
+    "conflict_level",
+    "phase_valentine",
+    "phase_election",
+    "phase_recovery"
+  ],
+  "description": {
+    "valence_mean": "7 日窗口 valence 均值（window_valence[t]）",
+    "valence_var": "7 日窗口 valence 方差（rolling_stats[:,1]）",
+    "valence_trend": "7 日窗口内 valence 的线性趋势斜率（正=上升，负=下降）",
+    "social_level": "该周平均社交强度（beh_social_count 日均值）",
+    "rest_level": "该周平均休息/低强度活动强度（beh_rest_count 日均值）",
+    "work_level": "该周平均工作强度（beh_work_count 日均值）",
+    "conflict_level": "该周情绪标签为「复杂」的日占比，近似情绪劳动/冲突频率",
+    "phase_valentine": "该周是否覆盖情人节筹备/高峰阶段（valentine_prep/peak）",
+    "phase_election": "该周是否覆盖选举阶段（election）",
+    "phase_recovery": "该周是否覆盖恢复阶段（recovery）"
+  }
+}
